@@ -1,84 +1,71 @@
 Recruitment Management System Backend
 
-This is a backend server for a Recruitment Management System, built as part of a backend developer assignment. It is built with Node.js, Express, and MongoDB, and provides a RESTful API for managing users, job postings, and applications.
+This is a backend server for a Recruitment Management System, built as part of a backend developer assignment.
+It is developed using Node.js, Express, and MongoDB, providing a RESTful API for managing users, job postings, and applications.
 
-The system supports two user roles: Admin and Applicant, with different permissions for each.
+The system supports two user roles — Admin and Applicant — each with distinct permissions.
 
 Features
 
-User Authentication: Secure user registration and login using JSON Web Tokens (JWT).
+User Authentication: Secure registration and login using JWT (JSON Web Tokens).
 
-Role-Based Access Control: Separate permissions for Admin and Applicant roles.
+Role-Based Access Control: Different permissions for Admin and Applicant.
 
-Resume Uploads: Applicants can upload their resumes (PDF and DOCX only) using multer.
+Resume Uploads: Applicants can upload resumes (PDF/DOCX only) using Multer.
 
-Resume Parsing: Integrates with a third-party API (apilayer.com) to parse uploaded resumes and extract key information (skills, education, experience) 
+Resume Parsing: Integrates with apilayer.com API to extract key resume details (skills, education, experience).
 
-Job Management: Admins can create and manage job openings.
+Job Management: Admins can create, update, and view job openings.
 
 Application System: Applicants can view and apply for open jobs.
 
 Tech Stack
-
-Server: Node.js, Express
-
-Database: MongoDB (with Mongoose)
-
-Authentication: jsonwebtoken, bcrypt.js
-
-File Handling: multer
-
-API Calls: axios
-
+Layer	Technology
+Server	Node.js, Express
+Database	MongoDB (Mongoose)
+Authentication	JSON Web Token (jsonwebtoken), bcrypt.js
+File Handling	multer
+API Calls	axios
 Installation & Setup
 
-Follow these steps to get the project running on your local machine.
+Follow these steps to set up the project locally.
 
 1. Clone the Repository
-
-git clone [https://github.com/MHasan1234/Recruitment-Management-System.git](https://github.com/MHasan1234/Recruitment-Management-System.git)
+git clone https://github.com/MHasan1234/Recruitment-Management-System.git
 cd Recruitment-Management-System
 
-
 2. Install Dependencies
-
 npm install
-
 
 3. Create Environment File
 
-Create a .env file in the root of the project and add the following variables.
+Create a .env file in the project root and add the following variables:
 
-# Port for the server to run on
+# Server Port
 PORT=5000
 
-# Your MongoDB connection string
+# MongoDB Connection
 MONGO_URI=your_mongodb_connection_string_here
 
-# A strong secret for signing JWTs
+# JWT Secret
 JWT_SECRET=your_strong_jwt_secret_key
 
-# API Key and URL for the resume parser
+# Resume Parser API
 RESUME_API_KEY=0bWeisRWoLj3UdXt3MXMSMWptYFIpQfS
-RESUME_API_URL=[https://api.apilayer.com/resume_parser/upload](https://api.apilayer.com/resume_parser/upload)
-
+RESUME_API_URL=https://api.apilayer.com/resume_parser/upload
 
 4. Run the Server
-
 npm start
 
 
-The server will start running on http://localhost:5000.
+The server will start running at:
+http://localhost:5000
 
 API Endpoints
-
-All API endpoints are documented below.
-
-Auth Routes (Base: /auth)
-
+Auth Routes (/auth)
 POST /auth/signup
 
-Creates a new user profile.
+Create a new user.
 
 Body (JSON):
 
@@ -91,10 +78,9 @@ Body (JSON):
   "address": "123 Main St"
 }
 
-
 POST /auth/login
 
-Authenticates a user and returns a JWT token.
+Authenticate a user and receive a JWT token.
 
 Body (JSON):
 
@@ -103,44 +89,40 @@ Body (JSON):
   "password": "password123"
 }
 
-
-User Routes (Base: /user)
-
+User Routes (/user)
 POST /user/uploadResume
 
-Uploads a resume file for the authenticated applicant.
+Upload a resume file for an authenticated applicant.
 
-Auth: Applicant token required.
+Auth: Applicant token required
 
 Body: form-data
 
-Key: resume
-
-Value: (file) your_resume.pdf
-
-Job Routes (Base: /jobs)
-
+Key	Value
+resume	(file) your_resume.pdf
+Job Routes (/jobs)
 GET /jobs
 
-Fetches all available job openings.
+Fetch all available job openings.
 
-Auth: Any authenticated user token required.
+Auth: Any authenticated user token required
 
 GET /jobs/apply
 
-Applies the authenticated applicant to a specific job.
+Apply for a specific job.
 
-Auth: Applicant token required.
+Auth: Applicant token required
 
-Query Parameter: ?job_id={job_id}
+Query Parameter:
+?job_id={job_id}
 
-Admin Routes (Base: /admin)
+Admin Routes (/admin)
 
-Note: All Admin routes require an Admin user token.
+All Admin routes require an Admin user token.
 
 POST /admin/job
 
-Creates a new job opening.
+Create a new job opening.
 
 Body (JSON):
 
@@ -150,15 +132,14 @@ Body (JSON):
   "companyName": "Tech Corp"
 }
 
-
 GET /admin/job/:job_id
 
-Fetches details for a single job, including a list of applicants.
+Fetch details for a single job, including the list of applicants.
 
 GET /admin/applicants
 
-Fetches a list of all users with the Applicant user type.
+Fetch all users with the Applicant role.
 
 GET /admin/applicant/:applicant_id
 
-Fetches the detailed profile of a specific applicant, including their parsed resume data.
+Fetch the detailed profile of a specific applicant, including parsed resume data.
