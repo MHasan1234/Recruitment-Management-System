@@ -12,7 +12,7 @@ Role-Based Access Control: Separate permissions for Admin and Applicant roles.
 
 Resume Uploads: Applicants can upload their resumes (PDF and DOCX only) using multer.
 
-Resume Parsing: Integrates with a third-party API (apilayer.com) to parse uploaded resumes and extract key information (skills, education, experience) [cite: 7, 50-51].
+Resume Parsing: Integrates with a third-party API (apilayer.com) to parse uploaded resumes and extract key information (skills, education, experience) 
 
 Job Management: Admins can create and manage job openings.
 
